@@ -40,9 +40,9 @@
     <Reference Include="nunit-console-runner">
       <HintPath>NUnit\nunit-console-runner.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>NUnit\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +54,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BackendTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dictionary" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Backend\Backend.csproj">
+      <Project>{42BD7EE0-9F73-463F-B074-4BB1A1ED8CD1}</Project>
+      <Name>Backend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcFrontend\MvcFrontend.csproj">
+      <Project>{36BA2834-E7EC-4FAA-9393-E28EEE523A6F}</Project>
+      <Name>MvcFrontend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfFrontend\WpfFrontend.csproj">
+      <Project>{AA1CD50C-D158-4BF8-ADBD-5407C43BBEC3}</Project>
+      <Name>WpfFrontend</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
