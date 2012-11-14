@@ -23,11 +23,6 @@ namespace Backend
 
         public List<string> GetWords()
         {
-            if (!File.Exists(_dictionaryPath))
-            {
-                return new List<string>();
-            }
-
             return File.ReadAllLines(_dictionaryPath).ToList();
         }
 

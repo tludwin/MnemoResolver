@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Converters>
+  <pl>
+    <Mapping>
+      (s|z), (t|d), n, m, r, l, j, k, (f|w), (p|b)
+    </Mapping>
+    <CharactersToOmit>
+      [qeyuiohgaxcvQEYUIOHGAXCV]*
+    </CharactersToOmit>
+  </pl>
+</Converters>

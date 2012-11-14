@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Converters>
+  <mapping_and_characters_to_omit_test>
+    <Mapping>
+      (a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)
+    </Mapping>
+    <CharactersToOmit>
+      CharactersToOmit rule
+    </CharactersToOmit>
+  </mapping_and_characters_to_omit_test>
+  <only_mapping_test>
+    <Mapping>
+      (a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)
+    </Mapping>
+  </only_mapping_test>
+  <only_characters_to_omit_test>
+    <CharactersToOmit>
+      CharactersToOmit rule
+    </CharactersToOmit>
+  </only_characters_to_omit_test>
+</Converters>

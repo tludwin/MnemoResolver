@@ -53,8 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RulesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BackendTests.cs" />
+    <Compile Include="NumberResolverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dictionary" />
@@ -73,6 +74,9 @@
       <Project>{AA1CD50C-D158-4BF8-ADBD-5407C43BBEC3}</Project>
       <Name>WpfFrontend</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Converters.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
