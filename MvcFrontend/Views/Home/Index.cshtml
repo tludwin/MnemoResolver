@@ -13,12 +13,20 @@
             else
             {
     <br />
+                int prefixLength = 0;
+
                 if (isMobile)
                 {
     <ul data-role="listview">
         @foreach (var result in results)
         {
-            <li data-role="list-divider">@result.Number</li>
+            <li data-role="list-divider"><span style="font-weight: lighter; color: #D0D0D0">@textToSearch.Substring(0, prefixLength)</span>
+                @result.Number
+                @{
+            prefixLength += result.Number.Length;
+                }
+                <span style="font-weight: lighter; color: #D0D0D0">@textToSearch.Substring(prefixLength)</span>
+            </li>
             <li>@string.Join(", ", result.Words)</li>
         }
     </ul>
@@ -26,9 +34,6 @@
                 else
                 {   
     <table width="100%">
-        @{
-                    int prefixLength = 0;
-        }
         @foreach (var result in results)
         {
             <tr>

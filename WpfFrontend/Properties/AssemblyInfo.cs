@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("WpfFrontend")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WpfFrontend")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard 2012")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
