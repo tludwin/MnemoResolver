@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Backend
 {
-    public class NumberResolver
+    public sealed class NumberResolver
     {
         public DictionarySource DictionarySource { get; set; }
         public Rules Rules { get; set; }
@@ -41,9 +41,9 @@ namespace Backend
             Rules = new Rules();
         }
 
-        public Dictionary<string, IEnumerable<string>> Search(string textToSearch)
+        public List<Result> Search(string textToSearch)
         {
-            var results = new Dictionary<string, IEnumerable<string>>();
+            var results = new List<Result>();
             if (ContainsOnlyNumbers(textToSearch))
             {
                 return Search(textToSearch, textToSearch.Length, results);
@@ -58,7 +58,7 @@ namespace Backend
             return numbersRule.IsMatch(textToSearch);
         }
 
-        public Dictionary<string, IEnumerable<string>> Search(string textToSearch, int i, Dictionary<string, IEnumerable<string>> previousResults)
+        public List<Result> Search(string textToSearch, int i, List<Result> previousResults)
         {
             string first;
             string last;
@@ -68,7 +68,7 @@ namespace Backend
                 first = textToSearch.Substring(0, i);
                 last = textToSearch.Substring(i);
 
-                if (previousResults.ContainsKey(first))
+                if (AddIfExists(first, previousResults))
                 {
                     return Search(last, last.Length, previousResults);
                 }
@@ -76,7 +76,7 @@ namespace Backend
                 var result = SearchUsingNumbers(first);
                 if (result.Count() > 0)
                 {
-                    previousResults.Add(first, result.ToList());
+                    previousResults.Add(new Result { Number = first, Words = result });
                     return Search(last, last.Length, previousResults);
                 }
 
@@ -84,6 +84,18 @@ namespace Backend
             }
 
             return previousResults;
+        }
+
+        private bool AddIfExists(string resolvedNumber, List<Result> results)
+        {
+            var existing = results.Where(o => o.Number == resolvedNumber);
+
+            if (existing.Count() > 0)
+            {
+                results.Add(existing.First());
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<string> SearchUsingNumbers(string search)

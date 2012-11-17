@@ -1,52 +1,62 @@
 ﻿@helper ResultPresenter(bool isMobile, string textToSearch, string dictionaryPath)
     {
-    if (!string.IsNullOrEmpty(textToSearch))
-    {
-
-        var resolver = new Backend.NumberResolver(dictionaryPath);
-        var results = resolver.Search(textToSearch);
-
-        if (results.Keys.Count == 0)
+        if (!string.IsNullOrEmpty(textToSearch))
         {
-    <span>move along, nothing to see here</span>
-        }
-        else
-        {
-    <br />
-            if (isMobile)
+
+            var resolver = new Backend.NumberResolver(dictionaryPath);
+            var results = resolver.Search(textToSearch);
+
+            if (results.Count == 0)
             {
+    <span>move along, nothing to see here</span>
+            }
+            else
+            {
+    <br />
+                if (isMobile)
+                {
     <ul data-role="listview">
         @foreach (var result in results)
         {
-            <li data-role="list-divider">@result.Key</li>
-            <li>@string.Join(", ", result.Value.ToArray())</li>
+            <li data-role="list-divider">@result.Number</li>
+            <li>@string.Join(", ", result.Words)</li>
         }
     </ul>
-            }
-            else
-            {   
-    <table>
+                }
+                else
+                {   
+    <table width="100%">
+        @{
+                    int prefixLength = 0;
+        }
         @foreach (var result in results)
         {
             <tr>
-                <th>@result.Key
+                <th>
+                    <span style="font-weight: lighter; color: #B0B0B0">@textToSearch.Substring(0, prefixLength)</span>
+                    @result.Number
+                    @{
+            prefixLength += result.Number.Length;
+                    }
+                    <span style="font-weight: lighter; color: #B0B0B0">@textToSearch.Substring(prefixLength)</span>
                 </th>
             </tr>
             <tr style="background-color: #c7d1d6">
                 <td>
-                    <span style="padding-left: 5px">@string.Join(", ", result.Value.ToArray())</span>
+                    <span style="padding-left: 5px">@string.Join(", ", result.Words)</span>
                 </td>
             </tr>
         }
     </table>
+                }
             }
-        }
-    }    
+        }    
 }
 @if (!Request.Browser.IsMobileDevice)
 { 
     <div data-role="header">
-        <h2>MnemoResolver</h2>
+        <h2>
+            MnemoResolver</h2>
     </div>
 }
 <section>

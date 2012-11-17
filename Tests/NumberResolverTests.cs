@@ -29,7 +29,7 @@ namespace Tests
 
             for (int i = 0; i < 10; i++)
             {
-                Assert.IsTrue(dictionary.ContainsKey(i.ToString()));
+                Assert.IsTrue(dictionary.Any(o => o.Number == i.ToString()));
             }
         }
 
@@ -43,7 +43,8 @@ namespace Tests
 
             var dictionary = backend.Search("0019928837465");
 
-            Assert.IsTrue(dictionary["0019928837465"].Any(o => o == "zsdpbnwfmkrjl"));
+            Assert.IsTrue(dictionary.Any(o => o.Number == "0019928837465"));
+            Assert.IsTrue(dictionary.Where(o=> o.Number=="0019928837465").Any(o => o.Words.Contains("zsdpbnwfmkrjl")));
         }
     }
 }
