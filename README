@@ -1,0 +1,6 @@
+Main goal of the project is to help memorizing digits, i.e. PINs, credit card or phone numbers.
+The algorithm is based on idea (no, not mine) of assigning consonant(s) to each digit and then trying to figure what word(s) contain those letters. 
+Example: 
+1. End user's input is: 4284401
+2. Input can be mapped to: "rnfrrst" out of which:
+3. "run forrest!" can be formed.
