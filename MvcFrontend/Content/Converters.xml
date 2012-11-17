@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Converters>
+  <Converter language="pl" mapping="(s|z), (t|d), n, m, r, l, j, k, (f|w), (p|b)" lettersToOmit="[qeyuiohgaxcvQEYUIOHGAXCV]*" />
+</Converters>

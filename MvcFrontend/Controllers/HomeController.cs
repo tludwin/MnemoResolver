@@ -8,24 +8,21 @@ namespace MvcFrontend.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        readonly string _dictionaryPath = @"~\Content\dictionary";
+
+        public ActionResult Index(string text)
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.SearchText = text;
+            ViewBag.DictionaryPath = Server.MapPath(_dictionaryPath);
 
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
         {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.SearchText = collection["SearchBox"];
+            ViewBag.DictionaryPath = Server.MapPath(_dictionaryPath);
             return View();
         }
     }

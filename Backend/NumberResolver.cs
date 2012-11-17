@@ -38,6 +38,7 @@ namespace Backend
         public NumberResolver(string dictionaryPath)
         {
             DictionarySource = new DictionarySource(dictionaryPath);
+            Rules = new Rules();
         }
 
         public Dictionary<string, IEnumerable<string>> Search(string textToSearch)
