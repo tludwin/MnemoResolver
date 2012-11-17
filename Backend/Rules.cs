@@ -10,7 +10,7 @@ namespace Backend
 {
     public sealed class Rules
     {
-        public string CharactersToOmit = "[qeyuiohgaxcvQEYUIOHGAXCV]*";
+        public string LettersToOmit = "[qeyuiohgaxcvQEYUIOHGAXCV]*";
         public readonly string NumbersRule = "^[0123456789]*$";
 
         public Dictionary<string, string> Converter = new Dictionary<string, string> 
@@ -44,7 +44,7 @@ namespace Backend
 
         public string GetPattern(string search)
         {
-            return "^" + CharactersToOmit + string.Join(CharactersToOmit, search.Select(o => Converter[o.ToString()]).ToArray()) + CharactersToOmit + "$";
+            return "^" + LettersToOmit + string.Join(LettersToOmit, search.Select(o => Converter[o.ToString()]).ToArray()) + LettersToOmit + "$";
         }
 
         public void SetConverterForLanguage(string language)
@@ -54,44 +54,104 @@ namespace Backend
 
         public void SetConverterForLanguage(string language, string converterFilePath)
         {
-            using (var reader = XmlReader.Create(converterFilePath))
+            using (var reader = XmlReader.Create(converterFilePath, new XmlReaderSettings
             {
+                IgnoreWhitespace = true
+            }))
+            {
+                reader.Read();
                 while (reader.Read())
                 {
-                    if (LanguageSettingsExits(language, reader))
+                    if (LanguageSettingsExist(language, reader))
                     {
                         UpdateConverter(reader);
+                        return;
                     }
                 }
             }
         }
 
-        private static bool LanguageSettingsExits(string language, XmlReader reader)
+        private static bool LanguageSettingsExist(string language, XmlReader reader)
         {
-            return reader.NodeType == XmlNodeType.Element && reader.Name == language &&
-                                    reader.Read();
+            return reader.NodeType == XmlNodeType.Element && reader.Name == "Converter"
+                && reader["language"] == language;
         }
 
         private void UpdateConverter(XmlReader reader)
         {
-            if (reader.Name == "Mapping")
-            {
-                SetConverterValues(reader);
-            }
-            else if (reader.Name == "CharactersToOmit")
-            {
-                CharactersToOmit = reader.Value;
-            }
+            SetConverterValues(reader);
+            SetLettersToOmit(reader);
         }
 
         private void SetConverterValues(XmlReader reader)
         {
-            var converterValues = reader.Value.Split(',');
+            string attribute = reader["mapping"];
 
-            for (int i = 0; i < 10; i++)
+            if (!string.IsNullOrEmpty(attribute))
             {
-                Converter[i.ToString()] = converterValues[i];
+                var converterValues = attribute.Split(',');
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Converter[i.ToString()] = converterValues[i].Trim();
+                }
             }
         }
+
+        private void SetLettersToOmit(XmlReader reader)
+        {
+            string attribute = reader["lettersToOmit"];
+
+            if (!string.IsNullOrEmpty(attribute))
+            {
+                LettersToOmit = attribute;
+            }
+        }
+
+        //public void SetConverterForLanguage(string language, string converterFilePath)
+        //{
+        //    using (var reader = XmlReader.Create(converterFilePath, new XmlReaderSettings
+        //                                                            {
+        //                                                                IgnoreWhitespace = true
+        //                                                            }))
+        //    {
+        //        reader.Read();
+        //        while (reader.Read())
+        //        {
+        //            if (LanguageSettingsExits(language, reader))
+        //            {
+        //                UpdateConverter(reader);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private static bool LanguageSettingsExits(string language, XmlReader reader)
+        //{
+        //    return reader.NodeType == XmlNodeType.Element && reader.Name == language &&
+        //                            reader.Read();
+        //}
+
+        //private void UpdateConverter(XmlReader reader)
+        //{
+        //    if (reader.Name == "Mapping" && reader.Read())
+        //    {
+        //        SetConverterValues(reader);
+        //    }
+        //    else if (reader.Name == "LettersToOmit" && reader.Read())
+        //    {
+        //        LettersToOmit = reader.Value.Trim();
+        //    }
+        //}
+
+        //private void SetConverterValues(XmlReader reader)
+        //{
+        //    var converterValues = reader.Value.Trim().Split(',');
+
+        //    for (int i = 0; i < 10; i++)
+        //    {
+        //        Converter[i.ToString()] = converterValues[i].Trim();
+        //    }
+        //}
     }
 }

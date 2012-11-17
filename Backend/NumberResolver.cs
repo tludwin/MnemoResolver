@@ -9,8 +9,8 @@ namespace Backend
 {
     public class NumberResolver
     {
-        DictionarySource _dictionarySource;
-        Rules _rules;
+        public DictionarySource DictionarySource { get; set; }
+        public Rules Rules { get; set; }
 
         private List<string> _words;
         public List<string> Words
@@ -19,7 +19,7 @@ namespace Backend
             {
                 if (_words == null)
                 {
-                    _words = _dictionarySource.GetWords();
+                    _words = DictionarySource.GetWords();
                 }
                 return _words;
             }
@@ -31,13 +31,13 @@ namespace Backend
 
         public NumberResolver()
         {
-            _dictionarySource = new DictionarySource();
-            _rules = new Rules();
+            DictionarySource = new DictionarySource();
+            Rules = new Rules();
         }
 
         public NumberResolver(string dictionaryPath)
         {
-            _dictionarySource = new DictionarySource(dictionaryPath);
+            DictionarySource = new DictionarySource(dictionaryPath);
         }
 
         public Dictionary<string, IEnumerable<string>> Search(string textToSearch)
@@ -53,7 +53,7 @@ namespace Backend
 
         private bool ContainsOnlyNumbers(string textToSearch)
         {
-            var numbersRule = new Regex(_rules.NumbersRule);
+            var numbersRule = new Regex(Rules.NumbersRule);
             return numbersRule.IsMatch(textToSearch);
         }
 
@@ -88,7 +88,7 @@ namespace Backend
         public IEnumerable<string> SearchUsingNumbers(string search)
         {
             var result = new List<string>();
-            string pattern = _rules.GetPattern(search);
+            string pattern = Rules.GetPattern(search);
             var regex = new Regex(pattern);
             foreach (var word in Words)
             {

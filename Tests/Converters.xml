@@ -1,21 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Converters>
-  <mapping_and_characters_to_omit_test>
-    <Mapping>
-      (a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)
-    </Mapping>
-    <CharactersToOmit>
-      CharactersToOmit rule
-    </CharactersToOmit>
-  </mapping_and_characters_to_omit_test>
-  <only_mapping_test>
-    <Mapping>
-      (a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)
-    </Mapping>
-  </only_mapping_test>
-  <only_characters_to_omit_test>
-    <CharactersToOmit>
-      CharactersToOmit rule
-    </CharactersToOmit>
-  </only_characters_to_omit_test>
+  <Converter language="mapping_and_letters_to_omit_test"
+             mapping="(a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)"
+             lettersToOmit="LettersToOmit rule" />
+  <Converter language="only_letters_to_omit_test"
+             lettersToOmit="LettersToOmit rule" />
+  <Converter language="only_mapping_test"
+             mapping="(a|b), (c|d), e, f, g, h, i, j, (k|l), (m|n)" />
+  <Converter language="NumberResolverTests"
+             mapping="(s|z), (t|d), n, m, r, l, j, k, (f|w), (p|b)" />
 </Converters>

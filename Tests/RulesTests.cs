@@ -16,7 +16,7 @@ namespace Tests
             {
                 "(a|b)", "(c|d)", "e", "f", "g", "h", "i", "j", "(k|l)", "(m|n)"
             };
-        string _charactersToOmit = "CharactersToOmit rule";
+        string _lettersToOmit = "LettersToOmit rule";
 
         [Test]
         public void WhenOnlyMappingIsProvidedOnlyConverterIsBeingChanged()
@@ -40,57 +40,57 @@ namespace Tests
             {
                 Assert.AreEqual(_expectedMapping[i], rules.Converter[i.ToString()]);
             }
-            Assert.AreNotEqual(_charactersToOmit, rules.CharactersToOmit);
+            Assert.AreNotEqual(_lettersToOmit, rules.LettersToOmit);
         }
 
         [Test]
-        public void WhenOnlyCharactersToOmitAreProvidedOnlyCharactersToOmitAreBeingChanged()
+        public void WhenOnlyLettersToOmitAreProvidedOnlyLettersToOmitAreBeingChanged()
         {
-            var rules = new Rules("only_characters_to_omit_test");
+            var rules = new Rules("only_letters_to_omit_test");
 
-            TestWhenOnlyCharactersToOmitAreProvidedOnlyCharactersToOmitAreBeingChanged(rules);
+            TestWhenOnlyLettersToOmitAreProvidedOnlyLettersToOmitAreBeingChanged(rules);
         }
 
         [Test]
-        public void WhenConverterFilePathAndOnlyCharactersToOmitAreProvidedOnlyCharactersToOmitAreBeingChanged()
+        public void WhenConverterFilePathAndOnlyLettersToOmitAreProvidedOnlyLettersToOmitAreBeingChanged()
         {
-            var rules = new Rules("only_characters_to_omit_test", _converterFilePath);
+            var rules = new Rules("only_letters_to_omit_test", _converterFilePath);
 
-            TestWhenOnlyCharactersToOmitAreProvidedOnlyCharactersToOmitAreBeingChanged(rules);
+            TestWhenOnlyLettersToOmitAreProvidedOnlyLettersToOmitAreBeingChanged(rules);
         }
 
-        private void TestWhenOnlyCharactersToOmitAreProvidedOnlyCharactersToOmitAreBeingChanged(Rules rules)
+        private void TestWhenOnlyLettersToOmitAreProvidedOnlyLettersToOmitAreBeingChanged(Rules rules)
         {
             for (int i = 0; i < 10; i++)
             {
                 Assert.AreNotEqual(_expectedMapping[i], rules.Converter[i.ToString()]);
             }
-            Assert.AreEqual(_charactersToOmit, rules.CharactersToOmit);
+            Assert.AreEqual(_lettersToOmit, rules.LettersToOmit);
         }
 
         [Test]
-        public void WhenFullConverterIsProvidedConverterAndCharactersToOmitAreBeingChanged()
+        public void WhenFullConverterIsProvidedConverterAndLettersToOmitAreBeingChanged()
         {
-            var rules = new Rules("mapping_and_characters_to_omit_test");
+            var rules = new Rules("mapping_and_letters_to_omit_test");
 
-            TestWhenFullConverterIsProvidedConverterAndCharactersToOmitAreBeingChanged(rules);
+            TestWhenFullConverterIsProvidedConverterAndLettersToOmitAreBeingChanged(rules);
         }
 
         [Test]
-        public void WhenConverterFilePathAndFullConverterIsProvidedConverterAndCharactersToOmitAreBeingChanged()
+        public void WhenConverterFilePathAndFullConverterIsProvidedConverterAndLettersToOmitAreBeingChanged()
         {
-            var rules = new Rules("mapping_and_characters_to_omit_test", _converterFilePath);
+            var rules = new Rules("mapping_and_letters_to_omit_test", _converterFilePath);
 
-            TestWhenFullConverterIsProvidedConverterAndCharactersToOmitAreBeingChanged(rules);
+            TestWhenFullConverterIsProvidedConverterAndLettersToOmitAreBeingChanged(rules);
         }
 
-        private void TestWhenFullConverterIsProvidedConverterAndCharactersToOmitAreBeingChanged(Rules rules)
+        private void TestWhenFullConverterIsProvidedConverterAndLettersToOmitAreBeingChanged(Rules rules)
         {
             for (int i = 0; i < 10; i++)
             {
                 Assert.AreEqual(_expectedMapping[i], rules.Converter[i.ToString()]);
             }
-            Assert.AreEqual(_charactersToOmit, rules.CharactersToOmit);
+            Assert.AreEqual(_lettersToOmit, rules.LettersToOmit);
         }
     }
 }
